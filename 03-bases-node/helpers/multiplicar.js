@@ -1,22 +1,28 @@
 //Importaciones desde file system (fs)
 const fs = require('fs');
+const colors = require('colors');
 
-const crearArchivoTabla = async (base = 0) => {
+const crearArchivoTabla = async (base = 0, listar, hasta= 10) => {
     try {
         let salida = '';
-        salida += '===============================`\n';
+
+        salida += '=============================== \n';
         salida += `Tabla del ${base} \n`;
         salida += '=============================== \n';
 
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= hasta; i++) {
             salida += `${base} x ${i} = ${i * base} \n`;
         }
 
-        fs.writeFileSync(`tabla-${base}.txt`, salida);
+        fs.writeFileSync(`./salida/tabla-${base}.txt`, salida);
+
+        if (listar) {
+            console.log( salida );
+        }
 
         return `tabla-${base}.txt`;
 
-    } catch ( err ) {
+    } catch (err) {
         throw err;
     }
 
