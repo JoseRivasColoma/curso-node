@@ -61,13 +61,18 @@ const usuariosPut = async (req = request, res = response) => {
 const usuariosDelete = async(req = request, res = response) => {
     const { id } = req.params;
 
+    const uid = req.uid;
     //Fisicamente lo borramos
     /* const usuario = await Usuario.findByIdAndDelete( id );*/ 
 
     //Cambiamos el estado del usuario
     const usuario = await Usuario.findByIdAndUpdate(id, {estado : false} )
 
+    // Obtenemos el usuario autenticado
+    const usuarioAutenticado = req.usuarioAutenticado
+
     res.json({
+        usuarioAutenticado, 
         usuario
     })
 }
